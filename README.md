@@ -26,7 +26,7 @@ https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6
 
 
 
-# What is the diffirence between SGD and back propogation?
+# What is the difference between SGD and back propogation?
 Backpropagation is an efficient method of computing gradients in directed graphs of computations, such as neural networks. This is not a learning method, but rather a nice computational trick which is often used in learning methods. This is actually a simple implementation of chain rule of derivatives, which simply gives you the ability to compute all required partial derivatives in linear time in terms of the graph size (while naive gradient computations would scale exponentially with depth).
 
 SGD is one of many optimization methods, namely first order optimizer, meaning, that it is based on analysis of the gradient of the objective. Consequently, in terms of neural networks it is often applied together with backprop to make efficient updates. You could also apply SGD to gradients obtained in a different way (from sampling, numerical approximators etc.). Symmetrically you can use other optimization techniques with backprop as well, everything that can use gradient/jacobian.
