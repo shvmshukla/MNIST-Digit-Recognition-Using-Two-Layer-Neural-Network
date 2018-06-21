@@ -65,7 +65,7 @@ You do notice that the negative region has a zero derivative, right? This can be
 
 https://www.quora.com/How-does-the-ReLu-solve-the-vanishing-gradient-problem
 
-# How does rectilinear activation function solve the vanishing gradient problem in neural networks?
+# Pros of using ReLU as an activation function
 
 The rectifier activation function allows a network to easily obtain sparse representations. For example, after uniform initialization of the weights, around 50% of hidden units continuous output values are real zeros, and this fraction can easily increase with sparsity-inducing regularization.
 
