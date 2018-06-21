@@ -3,10 +3,11 @@
 # How Do Neural Networks Work and why ReLu is selected for approximating a non linear boundary?
 https://medium.com/machine-intelligence-report/how-do-neural-networks-work-57d1ab5337ce
 
+____________________________________________________________________________________________________________________________
 
 # Backpropagation in detail
 https://medium.com/@14prakash/back-propagation-is-very-simple-who-made-it-complicated-97b794c97e5c
-
+____________________________________________________________________________________________________________________________
 # What is the purpose of multiple neurons in a hidden layer?
 1. Purpose of the multiple inputs: Each input represents a feature of the input dataset.
 2. Purpose of the hidden layer: Each neuron learns a different set of weights to represent different functions over the input data.
@@ -20,8 +21,36 @@ This is why when implementing backpropagation algorithm, one of the most importa
 
 https://datascience.stackexchange.com/questions/14028/what-is-the-purpose-of-multiple-neurons-in-a-hidden-layer
 
+____________________________________________________________________________________________________________________________
+
 # Various types of activation functions and when to use them
 https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6
+____________________________________________________________________________________________________________________________
+
+# What is the vanishing gradient problem?
+In a neural network you learn by going in the direction of the gradient (well, negative times a constant). If the gradient becomes nearly zero (it vanishes), the network does only learn very slow. A (local) minimum might be reached.
+
+Vanishing Gradient Problem is a difficulty found in training certain Artificial Neural Networks with gradient based methods (e.g Back Propagation). In particular, this problem makes it really hard to learn and tune the parameters of the earlier layers in the network. This problem becomes worse as the number of layers in the architecture increases.
+
+This is not a fundamental problem with neural networks - it's a problem with gradient based learning methods caused by certain activation functions. Let's try to intuitively understand the problem and the cause behind it.
+
+Problem
+
+Gradient based methods learn a parameter's value by understanding how a small change in the parameter's value will affect the network's output. If a change in the parameter's value causes very small change in the network's output - the network just can't learn the parameter effectively, which is a problem.
+
+This is exactly what's happening in the vanishing gradient problem -- the gradients of the network's output with respect to the parameters in the early layers become extremely small. That's a fancy way of saying that even a large change in the value of parameters for the early layers doesn't have a big effect on the output. Let's try to understand when and why does this problem happen.
+
+Cause
+
+Vanishing gradient problem depends on the choice of the activation function. Many common activation functions (e.g sigmoid or tanh) 'squash' their input into a very small output range in a very non-linear fashion. For example, sigmoid maps the real number line onto a "small" range of [0, 1]. As a result, there are large regions of the input space which are mapped to an extremely small range. In these regions of the input space, even a large change in the input will produce a small change in the output - hence the gradient is small.
+
+This becomes much worse when we stack multiple layers of such non-linearities on top of each other. For instance, first layer will map a large input region to a smaller output region, which will be mapped to an even smaller region by the second layer, which will be mapped to an even smaller region by the third layer and so on. As a result, even a large change in the parameters of the first layer doesn't change the output much.
+
+We can avoid this problem by using activation functions which don't have this property of 'squashing' the input space into a small region. A popular choice is Rectified Linear Unit which maps x to max(0,x).
+
+Hopefully, this helps you understand the problem of vanishing gradients. I'd also recommend reading along this iPython notebook which does a small experiment to understand and visualize this problem, as well as highlights the difference between the behavior of sigmoid and rectified linear units.
+
+____________________________________________________________________________________________________________________________
 
 # How does the ReLu solve the vanishing gradient problem?
 To explain using the sample neural network you have provided:
@@ -64,6 +93,7 @@ EDIT:
 You do notice that the negative region has a zero derivative, right? This can be a problem as the neuron is off within this region and cannot learn and gradients cannot be backpropagated through an off neuron. There are remedies to this by adding a leakage factor which results in a non-zero derivative and thus resulting in a modified neuron known as the leaky ReLU.
 
 https://www.quora.com/How-does-the-ReLu-solve-the-vanishing-gradient-problem
+____________________________________________________________________________________________________________________________
 
 # Pros of using ReLU as an activation function
 
@@ -78,9 +108,12 @@ Efficient variable-size representation- Different inputs may contain different a
 Linear separability- Sparse representations are also more likely to be linearly separable, or more easily separable with less non-linear machinery, simply because the information is represented in a high-dimensional space. Besides, this can reflect the original data format. In text-related applications for instance, the original raw data is already very sparse.
 
 Distributed but sparse- Dense distributed representations are the richest representations, being potentially exponentially more efficient than purely local ones (Bengio, 2009). Sparse representations’ efficiency is still exponentially greater, with the power of the exponent being the number of non-zero features. They may represent a good trade-off with respect to the above criteria.
+
 https://stats.stackexchange.com/questions/176794/how-does-rectilinear-activation-function-solve-the-vanishing-gradient-problem-in
+
 For more details read the following paper:
 https://www.utc.fr/~bordesan/dokuwiki/_media/en/glorot10nipsworkshop.pdf
+____________________________________________________________________________________________________________________________
 
 # What is the difference between SGD and back propogation?
 Backpropagation is an efficient method of computing gradients in directed graphs of computations, such as neural networks. This is not a learning method, but rather a nice computational trick which is often used in learning methods. This is actually a simple implementation of chain rule of derivatives, which simply gives you the ability to compute all required partial derivatives in linear time in terms of the graph size (while naive gradient computations would scale exponentially with depth).
@@ -95,7 +128,7 @@ gradient computation - where backprop comes to play
 optimization level - where techniques like SGD, Adam, Rprop, BFGS etc. come into play, which (if they are first order or higher) use gradient computed above
 https://stackoverflow.com/questions/37953585/what-is-the-diffirence-between-sgd-and-back-propogation
 
-
+____________________________________________________________________________________________________________________________
 
 
 
